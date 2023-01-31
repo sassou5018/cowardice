@@ -46,12 +46,12 @@ export default function Register() {
             alert("Error!!")
             return;
         }
-        router.push('/');
+        setTimeout(() => {router.push('/');}, 1000);
     }
 
     
     if(pb.authStore.isValid){
-        router.push('/');
+        setTimeout(() => {router.push('/');}, 1000);
     }
 
     

@@ -2,7 +2,6 @@
 import pb from '@/pocketbase'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react';
 
 export default function Login() {
     const router = useRouter();
@@ -18,10 +17,10 @@ export default function Login() {
             alert("Error!!")
             return;
         }
-        router.push('/');
+        setTimeout(() => {router.push('/');}, 1000);
     }
     if(pb.authStore.isValid){
-        router.push('/');
+        setTimeout(() => {router.prefetch('/');}, 1000);
     }
     
     return (

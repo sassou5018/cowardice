@@ -18,7 +18,7 @@ export default function Navbar() {
                 <MobileMenu />
                 </div>
                 <div className="">
-                <li>Write</li>
+                <li><Link href="/write">Write</Link></li>
                 </div>
                 <div>
                 <AccountMenu />
