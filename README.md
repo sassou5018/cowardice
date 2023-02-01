@@ -9,6 +9,11 @@ TODO:
  - Add User Profile Page
  - Add Account Settings Page
  - Make Registration invite only
+
+To Fix:
+ - Fix router.push causing errors
+ - Improve the auth guard
+ - Make more stuff SSR
 ___
 
 > Cowardice is a test using [PocketBase](pocketbase.io) and React's new [ServerSide Components](https://nextjs.org/docs/advanced-features/react-18/server-components) ([NextJS 13Beta](https://beta.nextjs.org/docs/getting-started))
