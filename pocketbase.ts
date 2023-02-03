@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
 
-const pb: any = new PocketBase('http://127.0.0.1:8090');
+const pb: any = new PocketBase(process.env.NEXT_PUBLIC_API_URL);
 
 export default pb;

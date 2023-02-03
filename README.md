@@ -6,12 +6,14 @@ TODO:
 
  - Add Article Cards
  - Add Article Pages
+ - Redirect To Article Page After Posting
  - Add User Profile Page
  - Add Account Settings Page
  - Make Registration invite only
 
 To Fix:
  - Fix router.push causing errors
+ - Fix broken editor css
  - Improve the auth guard
  - Make more stuff SSR
 ___

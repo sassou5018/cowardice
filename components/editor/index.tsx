@@ -1,60 +1,64 @@
 'use client'
 
-import { useState } from "react";
-import { EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import { convertToHTML } from 'draft-convert';
-import DOMPurify from 'dompurify';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useState, useCallback } from "react";
 import pb from "@/pocketbase";
+import RichTextEditor from './richTextEditor';
+import { useRouter } from "next/navigation";
 
-function sanitizeHTML(html: any){
-    return{
-        __html: DOMPurify.sanitize(html)
-    }
-}
 
 
 export default function MyEditor(){
-    const [editorState, setEditorState] = useState(
-        () => EditorState.createEmpty(),
-      );
-      const [title, setTitle] = useState('');
-      const onClick = async () => {
-        const html = convertToHTML(editorState.getCurrentContent());
-        const cleanHTML = sanitizeHTML(html);
-        console.log(pb.authStore.model);
-        console.log("cleanHTML", cleanHTML)
-        let res;
-        try{
-            res = await pb.collection("articles").create({
-                title: title,
-                content: cleanHTML.__html,
-                author: pb.authStore.model.id
-            })
-        }catch(err){
-            console.log(err);
-            alert("Error: Check Console For More");
-        }
-      }
-    
-      return (
-        <div className="bg-white h-screen">
-            <div className="flex flex-col justify-center items-center mb-5">
-                <label className="font-serif font-semibold">Title:</label>
-                <input type="text" className="shadow-lg border w-72 font-serif font-semibold" value={title} onChange={(e)=>setTitle(e.target.value)}/>
-            </div>
-          <Editor
-            //@ts-ignore
-            editorState={editorState}
-            onEditorStateChange={setEditorState}
-            wrapperClassName="bg-white"
-            toolbarClassName="flex justify-center bg-white"
-            editorClassName="px-6 bg-gray-100 shadow-lg max-w-5xl mx-auto border h-96"
-          />
-          <div className="flex justify-center mt-5">
-            <button onClick={onClick} className="rounded-md bg-black text-white p-1 w-36 sm:w-40  hover:bg-gray-800">Publish</button>
-          </div>
-        </div>
-      )
+  const router = useRouter();
+  const initialValue =
+  '<p>Your initial <b>html value</b> or an empty string to init editor without value</p>';
+  const [value, onChange] = useState<string>(initialValue);
+  const [title, setTitle] = useState<string>("");
+  const [posted, setPosted] = useState<boolean>(false);
+  const [loading , setLoading] = useState<boolean>(false);
+  async function onClick(){
+    let res:any;
+    setLoading(true);
+    try{
+      res = await pb.collection("articles").create({title, content: value, author: pb.authStore.model.id})
+    } catch(err){
+      alert("Error posting article");
+      console.log(err);
+      throw err;
+    }
+    setPosted(true);
+    setTimeout(()=>router.push(`/article/${res.id}`), 5000);
+  }
+
+  const handleImageUpload = useCallback(
+    (file: File): Promise<string> =>
+      new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        pb.collection("images").create(formData)
+          .then((result:any) => {
+            console.log("heeeeey we're here")
+            console.log(result)
+            resolve(`${process.env.NEXT_PUBLIC_API_URL}/api/files/images/${result.id}/${result.file}`)
+        })
+          .catch(() => {
+            console.log("i've errored out duuuuude bonkers")
+            reject(new Error('Upload failed'))
+          });
+      }),
+    []
+  );
+
+
+
+
+  return (
+    <div className="bg-stone-700 flex flex-col justify-start items-center h-screen">
+      <label htmlFor="title" className="text-white font-serif">Title:</label>
+      <input value={title} onChange={e=>setTitle(e.target.value)} type="text" className="mb-3 bg-stone-700 border border-slate-300 rounded-md placeholder:px-3 placeholder:font-serif" placeholder="Enter A Title"/>
+    <RichTextEditor value={value} onChange={onChange} onImageUpload={handleImageUpload}/>
+    <button onClick={onClick} className="bg-white text-black font-serif mt-6 rounded-md w-24 hover:bg-slate-300" disabled={loading ? true : false}>{loading ? "Loading..." :"Publish"}</button>
+    {posted ? <p className="bg-green-500 rounded-md text-white font-serif mt-3 p-1">Article Posted! Redirecting...</p> : null}
+    </div>
+  );
 }
