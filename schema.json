@@ -1,0 +1,196 @@
+[
+    {
+        "id": "_pb_users_auth_",
+        "name": "users",
+        "type": "auth",
+        "system": false,
+        "schema": [],
+        "listRule": "",
+        "viewRule": "",
+        "createRule": "",
+        "updateRule": "id = @request.auth.id",
+        "deleteRule": "id = @request.auth.id",
+        "options": {
+            "allowEmailAuth": false,
+            "allowOAuth2Auth": false,
+            "allowUsernameAuth": true,
+            "exceptEmailDomains": null,
+            "manageRule": null,
+            "minPasswordLength": 8,
+            "onlyEmailDomains": null,
+            "requireEmail": false
+        }
+    },
+    {
+        "id": "qznf0682we95m66",
+        "name": "articles",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "ghgr9arm",
+                "name": "author",
+                "type": "relation",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "collectionId": "_pb_users_auth_",
+                    "cascadeDelete": false,
+                    "maxSelect": 1,
+                    "displayFields": [
+                        "username"
+                    ]
+                }
+            },
+            {
+                "id": "ga7uyaqp",
+                "name": "content",
+                "type": "editor",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {}
+            },
+            {
+                "id": "xraliozf",
+                "name": "title",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": null,
+                    "max": 120,
+                    "pattern": ""
+                }
+            }
+        ],
+        "listRule": "",
+        "viewRule": "",
+        "createRule": "@request.auth.id != \"\" && @request.auth.id=author.id",
+        "updateRule": "@request.auth.id=author.id",
+        "deleteRule": "@request.auth.id=author.id",
+        "options": {}
+    },
+    {
+        "id": "5b0wdce2lpbrw80",
+        "name": "reactions",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "0asctt7z",
+                "name": "user",
+                "type": "relation",
+                "system": false,
+                "required": false,
+                "unique": true,
+                "options": {
+                    "collectionId": "_pb_users_auth_",
+                    "cascadeDelete": false,
+                    "maxSelect": 1,
+                    "displayFields": [
+                        "username"
+                    ]
+                }
+            },
+            {
+                "id": "myzbnscb",
+                "name": "reaction",
+                "type": "select",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "values": [
+                        "like",
+                        "dislike"
+                    ]
+                }
+            },
+            {
+                "id": "y9nldaek",
+                "name": "article",
+                "type": "relation",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "collectionId": "qznf0682we95m66",
+                    "cascadeDelete": false,
+                    "maxSelect": 1,
+                    "displayFields": [
+                        "title"
+                    ]
+                }
+            }
+        ],
+        "listRule": "",
+        "viewRule": "",
+        "createRule": "@request.auth.id != \"\"",
+        "updateRule": "@request.auth.id=user.id",
+        "deleteRule": "@request.auth.id=user.id",
+        "options": {}
+    },
+    {
+        "id": "lkiw7koq2h16hkh",
+        "name": "images",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "11nhamit",
+                "name": "file",
+                "type": "file",
+                "system": false,
+                "required": false,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "maxSize": 5242880,
+                    "mimeTypes": [
+                        "image/png",
+                        "image/vnd.mozilla.apng",
+                        "image/jpeg",
+                        "image/x-xpixmap",
+                        "image/jxl",
+                        "image/jp2",
+                        "image/jpx",
+                        "image/jpm",
+                        "image/jxs",
+                        "image/gif",
+                        "image/webp",
+                        "image/tiff",
+                        "image/bmp",
+                        "image/x-icon",
+                        "image/vnd.djvu",
+                        "image/bpg",
+                        "image/vnd.dwg",
+                        "image/x-icns",
+                        "image/heic",
+                        "image/heic-sequence",
+                        "image/heif",
+                        "image/heif-sequence",
+                        "image/vnd.radiance",
+                        "image/x-xcf",
+                        "image/x-gimp-pat",
+                        "image/x-gimp-gbr",
+                        "image/avif",
+                        "image/jxr",
+                        "image/svg+xml",
+                        "image/vnd.adobe.photoshop"
+                    ],
+                    "thumbs": []
+                }
+            }
+        ],
+        "listRule": "",
+        "viewRule": "",
+        "createRule": "@request.auth.id!=\"\"",
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    }
+]
