@@ -4,16 +4,17 @@ Access is going to be limited to invite only (Users get a limited number of invi
 ___
 TODO:
 
- - Add Article Cards
- - Add Article Pages
- - Redirect To Article Page After Posting
+ - ~~Add Article Cards~~
+ - ~~Add Article Pages~~
+ - ~~Redirect To Article Page After Posting~~
  - Add User Profile Page
+ - Add home page with infinite scroll
  - Add Account Settings Page
  - Make Registration invite only
 
 To Fix:
  - Fix router.push causing errors
- - Fix broken editor css
+ - ~~Fix broken editor css~~
  - Improve the auth guard
  - Make more stuff SSR
 ___
