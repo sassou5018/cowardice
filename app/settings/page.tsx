@@ -1,5 +1,4 @@
 import UpdateUserName from "@/components/updateUsername";
-import pb from "@/pocketbase";
 
 
 export default async function Page(){
