@@ -3,6 +3,7 @@
 import { Menu } from '@headlessui/react'
 import pb from '@/pocketbase'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link';
 export default function AccountMenu() {
     const router = useRouter();
     const logout = async () => {
@@ -15,12 +16,12 @@ export default function AccountMenu() {
       <Menu.Items className="grid grid-rows-3 absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 bg-stone-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <Menu.Item>
           {({ active }) => (
-            <a
+            <Link
               className={`${active && 'bg-stone-300'}`}
-              href="#"
+              href="/settings"
             >
               Account settings
-            </a>
+            </Link>
           )}
         </Menu.Item>
         <Menu.Item>

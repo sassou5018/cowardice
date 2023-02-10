@@ -2,14 +2,14 @@ import Link from "next/link";
 
 interface FullArticleProps {
     title: string
-    author: string,
-    date: Date,
-    content: {
-        __html: string
-    }
+    author: {
+        username: string
+    },
+    date: string,
+    content: string,
 }
 
-export default function FullArticle({title, author, date, content, id}: any) {
+export default function FullArticle({title, author, date, content}: FullArticleProps) {
     const updated = new Date(date).toLocaleDateString();
     const html = {
         __html: content
