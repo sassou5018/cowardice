@@ -17,6 +17,7 @@ To Fix:
  - ~~Fix broken editor css~~
  - Improve the auth guard
  - Make more stuff SSR
+ - Fix article Page Titles (request deduping broken with pb sdk)
 ___
 
 > Cowardice is a test project using [PocketBase](pocketbase.io) and React's new [ServerSide Components](https://nextjs.org/docs/advanced-features/react-18/server-components) ([NextJS 13Beta](https://beta.nextjs.org/docs/getting-started))
