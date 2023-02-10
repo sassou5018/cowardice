@@ -11,7 +11,7 @@ export default function ArticleCard({ author, title, date, id }: any) {
                     <Link
                         className='link'
                         target='_blank'
-                        href={`/author/${author.id}`}
+                        href={`/author/${author.username}`}
                     >
                         {author.username}
                     </Link>

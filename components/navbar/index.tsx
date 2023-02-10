@@ -8,7 +8,7 @@ export default function Navbar() {
     
 
     return(
-        <nav className="w-screen bg-stone-700 flex flex-row justify-between px-5 py-2 text-white">
+        <nav className=" bg-stone-700 flex flex-row justify-between px-5 py-2 text-white">
             <div>
                 <Logo/>
             </div>

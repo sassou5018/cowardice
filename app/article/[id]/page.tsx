@@ -2,19 +2,8 @@ import ArticleCard from '@/components/articleCard'
 import FullArticle from '@/components/fullArticle/fullArticle'
 import pb from '@/pocketbase'
 import Link from 'next/link'
+import getArticle from './getArticle'
 
-async function getArticle(id: string) {
-    let article
-    try {
-        article = await pb
-            .collection('articles')
-            .getOne(id, { expand: 'author' })
-    } catch (error) {
-        console.log('EEEEEEEEEEEEEEEEEROOOOOOOOOOOOOOOOOOOOR')
-        return { error: true }
-    }
-    return article
-}
 
 export default async function Page({ params }: any) {
     const { id } = params;

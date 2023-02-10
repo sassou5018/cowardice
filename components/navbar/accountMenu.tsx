@@ -12,7 +12,7 @@ export default function AccountMenu() {
   return (
     <Menu>
       <Menu.Button><a>Account</a></Menu.Button>
-      <Menu.Items className="grid grid-rows-3 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 bg-stone-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <Menu.Items className="grid grid-rows-3 absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 bg-stone-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <Menu.Item>
           {({ active }) => (
             <a
