@@ -1,9 +1,9 @@
-'use client'
+'use client';
 import pb from "@/pocketbase";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 export default function UpdateUserName(){
-    const [username, setUsername] = useState<string>(pb.authStore.model.username);
+    const [username, setUsername] = useState<string>(pb.authStore.model.username || "");
     const router = useRouter();
     const onChange = (e: any) => {
         setUsername(e.target.value);
