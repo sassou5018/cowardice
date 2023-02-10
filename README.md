@@ -8,7 +8,7 @@ TODO:
  - ~~Add Article Pages~~
  - ~~Redirect To Article Page After Posting~~
  - Add User Profile Page
- - Add home page with infinite scroll
+ - ~~Add home page with infinite scroll~~
  - Add Account Settings Page
  - Make Registration invite only
 
